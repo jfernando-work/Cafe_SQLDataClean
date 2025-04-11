@@ -1,6 +1,6 @@
-# 🧹 SQL Data Cleaning Project – Cafe Transactions
+# 🧹 SQL Data Cleaning – Cafe Transactions
 
-This project focuses on cleaning and preparing raw transactional data from a cafe using **SQL**. The dataset includes item purchases (e.g., coffee, cake, cookies, salad), with associated details such as quantity, pricing, location, and payment method.
+This project focuses on cleaning and preparing raw transactional data from a cafe using SQL. The dataset includes item purchases (e.g., coffee, cake, cookies) with details such as quantity, pricing, location, and payment method.
 
 ---
 
@@ -26,7 +26,7 @@ The dataset contains the following fields:
 | `price_per_unit`  | Price of a single item                           |
 | `total_spent`     | Total amount spent in the transaction            |
 | `payment_method`  | How the customer paid (e.g., cash, card)         |
-| `location`        | Store location where the transaction occurred    |
+| `location`        | Either in store or takeaway                      |
 | `transaction_date`| Date of the transaction                          |
 
 ---
@@ -34,8 +34,8 @@ The dataset contains the following fields:
 ## 🛠️ Cleaning Tasks Performed
 
 1. **Standardized Text Fields**
-   - Lowercased and trimmed whitespace from `item`, `payment_method`, and `location`.
-   - Corrected typos and inconsistent spellings (e.g., "cofee" → "coffee").
+   - Trimmed whitespace from `item`, `payment_method`, and `location`.
+   - Corrected typos and inconsistent spellings.
 
 2. **Fixed Numeric Fields**
    - Ensured `quantity`, `price_per_unit`, and `total_spent` are stored as numeric types.
