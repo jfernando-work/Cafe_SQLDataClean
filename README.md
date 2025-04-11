@@ -77,3 +77,13 @@ AND cs."PricePerUnit_Cleaned" IS NULL;
 UPDATE public."Cafe_Sales"
 SET "PricePerUnit_Cleaned" = ROUND("TotalSpent_Cleaned" / "Quantity_Cleaned", 1)
 WHERE "PricePerUnit_Cleaned" IS NULL;
+
+```
+
+---
+
+## 📊 Data Source
+
+Data used in this dashboard comes from this Kaggle dataset - https://www.kaggle.com/datasets/ahmedmohamed2003/cafe-sales-dirty-data-for-cleaning-training.
+
+---
