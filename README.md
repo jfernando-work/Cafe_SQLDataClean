@@ -26,7 +26,7 @@ The dataset contains the following fields:
 | `price_per_unit`  | Price of a single item                           |
 | `total_spent`     | Total amount spent in the transaction            |
 | `payment_method`  | How the customer paid (e.g., cash, card)         |
-| `location`        | Either in store or takeaway                      |
+| `location`        | Either In-Store or Takeaway                      |
 | `transaction_date`| Date of the transaction                          |
 
 ---
@@ -42,27 +42,38 @@ The dataset contains the following fields:
    - Recalculated `total_spent` where values were incorrect (`quantity * price_per_unit`).
 
 3. **Handled Missing or Null Values**
-   - Imputed or removed rows with missing essential data (e.g., missing `item` or `price`).
+   - Calculated `price_per_unit` for any fields that were left empty.
    - Replaced empty strings with NULLs where appropriate.
+   - Calculated any instances where `quantity` was missing.
 
 4. **Date Formatting**
    - Converted `transaction_date` into a proper DATE or TIMESTAMP format.
+   - Made sure `price_per_unit` field had the correct number of decimals.
    - Removed or flagged invalid date entries.
+   - Extracted Day and Month values from the `transaction_date` field.
 
 5. **Duplicates & Outliers**
    - Identified and removed duplicate transactions.
-   - Flagged outliers (e.g., very high quantity or total_spent).
 
 ---
 
 ## 🧪 Sample Queries Used
 
 ```sql
--- Example: Standardizing item names
-UPDATE transactions
-SET item = LOWER(TRIM(item));
+-- Subquery to create a table with items / pries. Join that back with all rows.
+UPDATE public."Cafe_Sales" AS cs
+SET "PricePerUnit_Cleaned" = prices."PricePerUnit_Cleaned"
+FROM (
+    SELECT DISTINCT "Item_Cleaned", "PricePerUnit_Cleaned"
+    FROM public."Cafe_Sales"
+    WHERE "Item_Cleaned" IS NOT NULL
+    AND "PricePerUnit_Cleaned" IS NOT NULL
+) AS prices
+WHERE cs."Item_Cleaned" = prices."Item_Cleaned" 
+AND cs."PricePerUnit_Cleaned" IS NULL;
 
--- Example: Fixing incorrect total_spent
-UPDATE transactions
-SET total_spent = quantity * price_per_unit
-WHERE total_spent IS NULL OR total_spent != quantity * price_per_unit;
+
+-- Calculate the PricePerUnit_Cleaned for missing values.
+UPDATE public."Cafe_Sales"
+SET "PricePerUnit_Cleaned" = ROUND("TotalSpent_Cleaned" / "Quantity_Cleaned", 1)
+WHERE "PricePerUnit_Cleaned" IS NULL;
