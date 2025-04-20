@@ -1,12 +1,10 @@
-# 🧹 SQL Data Cleaning – Cafe Transactions
+# SQL Data Cleaning – Cafe Transactions
 
 This project focuses on cleaning and preparing raw transactional data from a cafe using SQL. The dataset includes item purchases (e.g., coffee, cake, cookies) with details such as quantity, pricing, location, and payment method.
 
 ---
 
-## 📂 Project Overview
-
-### 📌 Objective
+## Objective
 To clean and standardize a raw dataset for accurate analysis and reporting. This includes:
 - Removing inconsistencies
 - Handling missing or invalid values
@@ -15,7 +13,7 @@ To clean and standardize a raw dataset for accurate analysis and reporting. This
 
 ---
 
-## 🧾 Data Fields
+## Data Fields
 
 The dataset contains the following fields:
 
@@ -31,7 +29,7 @@ The dataset contains the following fields:
 
 ---
 
-## 🛠️ Cleaning Tasks Performed
+## Cleaning Tasks Performed
 
 1. **Standardized Text Fields**
    - Trimmed whitespace from `item`, `payment_method`, and `location`.
@@ -57,7 +55,7 @@ The dataset contains the following fields:
 
 ---
 
-## 🧪 Sample Queries Used
+## Sample Queries Used
 
 ```sql
 -- Subquery to create a table with items / pries. Join that back with all rows.
@@ -82,7 +80,7 @@ WHERE "PricePerUnit_Cleaned" IS NULL;
 
 ---
 
-## 📊 Data Source
+## Data Source
 
 Data used in this dashboard comes from this Kaggle dataset - https://www.kaggle.com/datasets/ahmedmohamed2003/cafe-sales-dirty-data-for-cleaning-training.
 
